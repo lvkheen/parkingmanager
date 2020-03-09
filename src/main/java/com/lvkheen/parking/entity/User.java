@@ -1,9 +1,9 @@
 package com.lvkheen.parking.entity;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user")
@@ -13,14 +13,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+    @NotNull(message = "Enter first name")
+    @Pattern(regexp = "[A-Za-z]+", message = "Enter correct first name")
     @Column(name = "first_name")
     private String firstName;
+    @NotNull(message = "Enter last name")
+    @Pattern(regexp = "[A-Za-z]+", message = "Enter correct last name")
     @Column(name = "last_name")
     private String lastName;
+    @NotNull(message = "Enter phone number")
+    @Pattern(regexp = "[8][9][\\d]{9}", message = "Enter phone number in 89123456789 format")
     @Column(name = "phone")
     private String phone;
+    @NotNull(message = "Enter car name")
+    @Size(min=1, message = "Enter car name")
     @Column(name = "car")
     private String car;
+    @NotNull(message = "Enter car number")
+    @Pattern(regexp = "[a-zA-Z][0-9]{3}[a-zA-Z]{2}", message = "Enter car number in A000AA format")
     @Column(name = "car_number")
     private String carNumber;
     @Column(name = "location")

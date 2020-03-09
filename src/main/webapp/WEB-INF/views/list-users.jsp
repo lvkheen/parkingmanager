@@ -21,7 +21,7 @@
 <div id="wrapper">
     <div id="header">
         <h2> <a href="${pageContext.request.contextPath}/user/list">
-            <img src="${pageContext.request.contextPath}/resources/images/home.png" alt="Back to list" height="30" width="30"/></a>Parking manager project</h2>
+            <img src="${pageContext.request.contextPath}/resources/images/home.png" alt="Back to list" height="30" width="30"/></a>Parking manager</h2>
     </div>
 </div>
 
@@ -77,6 +77,8 @@
 
             </c:forEach>
         </table>
+        <br><br>
+        <a href="https://github.com/lvkheen/parkingmanager"> Source code </a>
     </div>
 </div>
 </body>

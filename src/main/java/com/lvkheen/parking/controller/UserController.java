@@ -3,10 +3,14 @@ package com.lvkheen.parking.controller;
 import com.lvkheen.parking.entity.User;
 import com.lvkheen.parking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -31,9 +35,13 @@ public class UserController {
     }
 
     @PostMapping("/saveUser")
-    String saveUser(@ModelAttribute("user") User user){
-        userService.saveUser(user);
-        return "redirect:/user/list";
+    String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "user-form";
+        } else {
+            userService.saveUser(user);
+            return "redirect:/user/list";
+        }
         }
 
         @GetMapping("/showFormForUpdate")
@@ -56,30 +64,11 @@ public class UserController {
         return "list-users";
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        @InitBinder
+    public void initBinder(WebDataBinder webDataBinder){
+            StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+            webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+        }
 
 
     }
